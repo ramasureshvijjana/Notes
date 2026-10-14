@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VJ AI Forge | Learning Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --blue: #2563eb;
+            --green: #059669;
+            --light-blue: #eff6ff;
+            --light-green: #ecfdf5;
+            --text: #172554;
+            --muted: #64748b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 7%;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #dbeafe;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.05);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--blue);
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        .nav-label {
+            background: #dcfce7;
+            color: #166534;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 65px 20px 35px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 8px 17px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.25;
+            font-weight: 800;
+            margin-bottom: 18px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #2563eb, #059669);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Search box */
+        .search-container {
+            max-width: 500px;
+            margin: 28px auto 0;
+            padding: 0 15px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #bfdbfe;
+            border-radius: 14px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+            background: white;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.07);
+            transition: 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Course section */
+        .courses {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 25px 30px 75px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .section-heading h2 {
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .course-count {
+            color: var(--green);
+            background: #dcfce7;
+            padding: 7px 13px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Responsive cards */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .course-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 255px;
+            padding: 27px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e2e8f0;
+            border-radius: 22px;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.05);
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .course-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-9px);
+            border-color: #93c5fd;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.13);
+        }
+
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .course-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            font-size: 32px;
+            margin-bottom: 22px;
+        }
+
+        .blue {
+            background: #dbeafe;
+        }
+
+        .green {
+            background: #d1fae5;
+        }
+
+        .purple {
+            background: #ede9fe;
+        }
+
+        .orange {
+            background: #ffedd5;
+        }
+
+        .pink {
+            background: #fce7f3;
+        }
+
+        .cyan {
+            background: #cffafe;
+        }
+
+        .course-card h3 {
+            font-size: 21px;
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .course-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .course-tag {
+            color: #166534;
+            background: #ecfdf5;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            color: var(--blue);
+            background: var(--light-blue);
+            font-size: 20px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .course-card:hover .arrow {
+            color: white;
+            background: var(--green);
+            transform: translateX(3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: var(--blue);
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            color: var(--muted);
+            padding: 35px 10px;
+        }
+
+        /* Tablet */
+        @media (max-width: 900px) {
+            .course-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .navbar {
+                padding: 18px 5%;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 580px) {
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 45px;
+            }
+
+            .courses {
+                padding: 20px 18px 50px;
+            }
+
+            .course-card {
+                min-height: 230px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .section-heading h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">VJ AI <span>Forge</span></div>
+        <div class="nav-label">MY LEARNING HUB 🚀</div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-badge">📚 LEARN • PRACTICE • BUILD</div>
+
+        <h1>
+            Your Gateway to <span>AI & Development</span>
+        </h1>
+
+        <p>
+            Explore your learning notes, strengthen your fundamentals,
+            practice coding, and build real-world projects — one subject at a time.
+        </p>
+
+        <div class="search-container">
+            <input
+                type="search"
+                id="courseSearch"
+                class="search-box"
+                placeholder="🔍 Search Python, LLM, FastAPI..."
+                aria-label="Search subjects"
+            >
+        </div>
+    </header>
+
+    <!-- Course cards -->
+    <main class="courses">
+
+        <div class="section-heading">
+            <h2>Explore Your Subjects</h2>
+            <span class="course-count" id="courseCount">8 Subjects</span>
+        </div>
+
+        <div class="course-grid" id="courseGrid">
+
+            <!-- Python -->
+            <a class="course-card"
+               href="python/python_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="python programming basics">
+                <div class="course-icon blue">🐍</div>
+                <h3>Python</h3>
+                <p>
+                    Learn Python fundamentals, data types, operators,
+                    collections, functions, OOP, and file handling.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">PROGRAMMING</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- LLM -->
+            <a class="course-card"
+               href="llm/llm_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="llm large language models">
+                <div class="course-icon purple">🧠</div>
+                <h3>LLMs</h3>
+                <p>
+                    Understand large language models, tokens, embeddings,
+                    transformers, prompting, and model inference.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">GENERATIVE AI</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- FastAPI -->
+            <a class="course-card"
+               href="fastapi/fastapi_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="fastapi api backend python">
+                <div class="course-icon green">⚡</div>
+                <h3>FastAPI</h3>
+                <p>
+                    Build high-performance APIs using routes, request
+                    validation, Pydantic, dependencies, and authentication.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">BACKEND</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- GenAI -->
+            <a class="course-card"
+               href="genai/genai_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="genai generative artificial intelligence">
+                <div class="course-icon pink">✨</div>
+                <h3>Generative AI</h3>
+                <p>
+                    Explore GenAI concepts, foundation models, prompt
+                    engineering, architectures, and applications.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">AI CONCEPTS</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- RAG -->
+            <a class="course-card"
+               href="rag/rag_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="rag retrieval augmented generation vector database">
+                <div class="course-icon orange">📚</div>
+                <h3>RAG</h3>
+                <p>
+                    Learn document ingestion, chunking, embeddings,
+                    vector databases, retrieval, and reranking.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">AI APPLICATIONS</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- MCP -->
+            <a class="course-card"
+               href="mcp/mcp_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="mcp model context protocol tools agents">
+                <div class="course-icon cyan">🔗</div>
+                <h3>MCP</h3>
+                <p>
+                    Understand Model Context Protocol, tools, resources,
+                    prompts, servers, clients, and integrations.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">AGENTIC AI</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- Git and GitHub -->
+            <a class="course-card"
+               href="git-github/git_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="git github version control">
+                <div class="course-icon blue">🌿</div>
+                <h3>Git & GitHub</h3>
+                <p>
+                    Practice version control, commits, branches, merges,
+                    pull requests, and repository management.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">DEVELOPER TOOLS</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- Web Development -->
+            <a class="course-card"
+               href="web-development/web_notes.html"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-name="html css javascript web development">
+                <div class="course-icon green">🌐</div>
+                <h3>Web Development</h3>
+                <p>
+                    Learn HTML, CSS, JavaScript, responsive layouts,
+                    website design, and frontend fundamentals.
+                </p>
+                <div class="card-footer">
+                    <span class="course-tag">WEB TECHNOLOGY</span>
+                    <span class="arrow">↗</span>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            <h3>No subjects found 🔎</h3>
+            <p>Try searching with a different keyword.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        Built for continuous learning with
+        <strong>VJ AI Forge</strong> 💙💚
+    </footer>
+
+    <!-- Search functionality -->
+    <script>
+        const searchInput = document.getElementById("courseSearch");
+        const cards = document.querySelectorAll(".course-card");
+        const courseCount = document.getElementById("courseCount");
+        const noResults = document.getElementById("noResults");
+
+        searchInput.addEventListener("input", function () {
+            const query = this.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(function (card) {
+                const searchableText =
+                    (card.innerText + " " + card.dataset.name).toLowerCase();
+
+                const matches = searchableText.includes(query);
+
+                card.style.display = matches ? "flex" : "none";
+
+                if (matches) {
+                    visibleCount++;
+                }
+            });
+
+            courseCount.textContent = visibleCount + " Subjects";
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+        });
+    </script>
+
+</body>
+</html>
