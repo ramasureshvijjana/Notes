@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Learning Hub | VJ AI Forge</title>
+  <style>
+    :root {
+      --blue: #dff3ff;
+      --blue-strong: #087eb5;
+      --blue-deep: #075985;
+      --green: #d9fbe8;
+      --green-strong: #168653;
+      --green-deep: #08613b;
+      --ink: #123047;
+      --muted: #527083;
+      --surface: #ffffff;
+      --page: #f3fbff;
+      --line: #c9e7ee;
+      --shadow: 0 12px 32px rgba(14, 87, 113, .10);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65
+    }
+
+    a {
+      color: inherit
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      min-height: 100vh
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 25px 18px;
+      background: linear-gradient(165deg, #e4f5ff 0%, #e0fff0 100%);
+      border-right: 1px solid var(--line)
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px 22px;
+      border-bottom: 1px solid #b8e0df;
+      margin-bottom: 18px
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue-strong), var(--green-strong));
+      color: white;
+      font-weight: 950;
+      font-size: 20px;
+      box-shadow: 0 7px 18px #087eb533
+    }
+
+    .brand h1 {
+      font-size: 16px;
+      line-height: 1.2;
+      margin: 0;
+      font-weight: 950;
+      letter-spacing: .2px
+    }
+
+    .brand p {
+      font-size: 11px;
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase
+    }
+
+    .nav-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.7px;
+      color: #547789;
+      font-weight: 950;
+      padding: 10px 11px
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 11px;
+      margin: 3px 0;
+      color: #234b60;
+      transition: .2s
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #fff;
+      color: var(--blue-deep);
+      box-shadow: 0 4px 14px #0d67831a;
+      transform: translateX(2px)
+    }
+
+    .nav-num {
+      display: grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: #ffffffb8;
+      color: var(--green-deep);
+      font-size: 11px;
+      font-weight: 950
+    }
+
+    .sidebar-note {
+      margin: 22px 5px 0;
+      padding: 14px;
+      border-radius: 15px;
+      background: #ffffffa8;
+      border: 1px solid #c3e7d5;
+      font-size: 12px;
+      color: #426778;
+      font-weight: 700
+    }
+
+    main {
+      min-width: 0;
+      padding: 34px clamp(18px, 4vw, 58px) 70px
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 5vw, 54px);
+      border-radius: 28px;
+      background: linear-gradient(120deg, #d8f0ff 0%, #dffbe9 100%);
+      border: 1px solid #c0e5e6;
+      box-shadow: var(--shadow)
+    }
+
+    .hero:after {
+      content: "Py";
+      position: absolute;
+      right: 4%;
+      bottom: -55px;
+      font-size: clamp(130px, 20vw, 260px);
+      font-weight: 1000;
+      color: #ffffff8c;
+      line-height: 1;
+      pointer-events: none
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #ffffffb8;
+      border: 1px solid #c3e6dc;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 950;
+      color: var(--green-deep)
+    }
+
+    .hero h2 {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1.8px;
+      margin: 18px 0 14px;
+      font-weight: 1000;
+      max-width: 700px
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #087eb5, #168653);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      font-weight: 700;
+      color: #355d70;
+      font-size: 16px;
+      margin: 0
+    }
+
+    .hero-tags {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 23px
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 9px;
+      background: #fff;
+      border: 1px solid #c8e7e4;
+      font-size: 12px;
+      font-weight: 900;
+      color: #24556a
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0 36px
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 17px 19px;
+      box-shadow: 0 6px 18px #164d6010
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 23px;
+      line-height: 1.2;
+      font-weight: 1000;
+      color: var(--blue-deep)
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800
+    }
+
+    .section {
+      margin: 35px 0 0;
+      scroll-margin-top: 24px
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      margin-bottom: 17px
+    }
+
+    .section-icon {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 45px;
+      height: 45px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #d9f1ff, #d8fbe6);
+      font-size: 22px;
+      border: 1px solid #c4e8df
+    }
+
+    .section-heading h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.2;
+      margin: 0;
+      font-weight: 1000;
+      letter-spacing: -.6px
+    }
+
+    .section-heading p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      padding: 21px;
+      margin: 13px 0;
+      box-shadow: 0 6px 20px #164d6008
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 17px;
+      font-weight: 950;
+      color: #0d5d7f
+    }
+
+    .card h4 {
+      font-size: 14px;
+      font-weight: 950;
+      margin: 17px 0 8px;
+      color: var(--green-deep)
+    }
+
+    .card p {
+      margin: 8px 0;
+      color: #3e6072;
+      font-weight: 650
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px
+    }
+
+    .topic {
+      background: linear-gradient(145deg, #fff, #f4fcff);
+      border: 1px solid #d5eaf0;
+      border-radius: 14px;
+      padding: 14px
+    }
+
+    .topic strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+      color: #124c68;
+      margin-bottom: 5px
+    }
+
+    .topic p {
+      font-size: 12px;
+      margin: 0;
+      color: #567487;
+      font-weight: 650
+    }
+
+    ul.clean {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0
+    }
+
+    ul.clean li {
+      position: relative;
+      padding: 7px 8px 7px 25px;
+      border-bottom: 1px dashed #d9e9ec;
+      font-weight: 750;
+      font-size: 13px;
+      color: #284e62
+    }
+
+    ul.clean li:last-child {
+      border-bottom: 0
+    }
+
+    ul.clean li:before {
+      content: "✓";
+      position: absolute;
+      left: 4px;
+      top: 7px;
+      color: var(--green-strong);
+      font-weight: 1000
+    }
+
+    code,
+    pre {
+      font-family: "Cascadia Code", Consolas, monospace
+    }
+
+    code {
+      background: #eaf7fc;
+      border: 1px solid #d1eaf1;
+      border-radius: 5px;
+      padding: 2px 5px;
+      color: #075985;
+      font-size: .92em;
+      font-weight: 800
+    }
+
+    /* ===== Python Code Snippets ===== */
+    pre {
+      background: #f8fafc;
+      color: #334155;
+      padding: 20px;
+      border: 1px solid #dbe5ee;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 500;
+      margin: 12px 0;
+      white-space: pre;
+      tab-size: 4;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border: none;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+    }
+
+    /* Inline code */
+    :not(pre)>code {
+      background: #eef6ff;
+      color: #166534;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    /* Python syntax colors */
+    .token.keyword {
+      color: #7c3aed;
+      font-weight: 700;
+    }
+
+    .token.string {
+      color: #15803d;
+    }
+
+    .token.comment {
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .token.function {
+      color: #2563eb;
+    }
+
+    .token.number {
+      color: #c2410c;
+    }
+
+    .token.operator {
+      color: #be185d;
+    }
+
+    .token.builtin {
+      color: #0e7490;
+    }
+
+    .token.class-name {
+      color: #b45309;
+      font-weight: 600;
+    }
+
+    /* Code block on smaller screens */
+    @media (max-width: 768px) {
+      pre {
+        padding: 14px;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+    }
+
+    .callout {
+      padding: 13px 15px;
+      border-radius: 12px;
+      background: #e9fff1;
+      border: 1px solid #bce9ce;
+      color: #185a3c;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 13px
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin: 12px 0
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 500px;
+      background: #fff
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid #e1edf0;
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    th {
+      background: #e5f6ff;
+      color: #075985;
+      font-weight: 950
+    }
+
+    tr:last-child td {
+      border-bottom: 0
+    }
+
+    .search {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 11px;
+      border: 1px solid #b9dce4;
+      background: #ffffffc9;
+      color: var(--ink);
+      font-weight: 750;
+      margin: 0 0 14px;
+      outline: none
+    }
+
+    .search:focus {
+      border-color: var(--blue-strong);
+      box-shadow: 0 0 0 3px #087eb51c
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 17px
+    }
+
+    .topbar span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 850
+    }
+
+    .topbar button {
+      border: 1px solid #b9dfe0;
+      background: #fff;
+      color: #075985;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 10px 5px;
+      color: #5b7b8a;
+      font-size: 12px;
+      font-weight: 750
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    @media(max-width:900px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        max-height: none;
+        padding: 16px
+      }
+
+      .brand {
+        padding-bottom: 13px;
+        margin-bottom: 10px
+      }
+
+      nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2px
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 8px
+      }
+
+      .sidebar-note {
+        display: none
+      }
+
+      main {
+        padding-top: 20px
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+    }
+
+    @media(max-width:560px) {
+      nav {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .stats,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr
+      }
+
+      .hero:after {
+        right: -12px;
+        bottom: -30px
+      }
+
+      .hero p {
+        font-size: 14px
+      }
+    }
+
+    @media print {
+
+      .sidebar,
+      .topbar button,
+      .search {
+        display: none
+      }
+
+      .layout {
+        display: block
+      }
+
+      main {
+        padding: 0
+      }
+
+      .hero,
+      .card,
+      .stat {
+        box-shadow: none;
+        break-inside: avoid
+      }
+
+      body {
+        background: #fff
+      }
+
+    }
+    /* File Handling image */
+    #file-handling img {
+        width: 150%;
+        max-width: 800px;
+        height: auto;
+        display: block;
+        margin-top: 15px;
+        border-radius: 10px;
+        object-fit: contain;
+    }
+
+    /* Responsive image for mobile screens */
+    @media (max-width: 768px) {
+        #file-handling img {
+            max-width: 100%;
+        }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+
+</head>
+
+<body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">Py</div>
+        <div>
+          <h1>PYTHON LEARNING HUB</h1>
+          <p>VJ AI Forge</p>
+        </div>
+      </div>
+      <input id="topicSearch" class="search" type="search" placeholder="Search course topics..."
+        aria-label="Search course topics">
+      <div class="nav-label">Course navigation</div>
+      <nav id="courseNav">
+        <a href="#overview"><span class="nav-num">⌂</span>Course Overview</a>
+        <a href="#print"><span class="nav-num">01</span>Print Function</a>
+        <a href="#variables"><span class="nav-num">02</span>Variables & Constants</a>
+        <a href="#datatypes"><span class="nav-num">03</span>Data Types</a>
+        <a href="#operators"><span class="nav-num">04</span>Operators</a>
+        <a href="#casting"><span class="nav-num">05</span>Type Casting</a>
+        <a href="#mutable"><span class="nav-num">06</span>Mutable & Immutable</a>
+        <a href="#interning"><span class="nav-num">07</span>Object Interning</a>
+        <a href="#strings"><span class="nav-num">08</span>Strings & Methods</a>
+        <a href="#lists"><span class="nav-num">09</span>Lists</a>
+        <a href="#tuples"><span class="nav-num">10</span>Tuples</a>
+        <a href="#sets"><span class="nav-num">11</span>Sets</a>
+        <a href="#slicing"><span class="nav-num">12</span>Slicing</a>
+        <a href="#concat"><span class="nav-num">13</span>Concatenation</a>
+        <a href="#sort"><span class="nav-num">14</span>Sort & Reverse</a>
+        <a href="#comprehension"><span class="nav-num">15</span>Comprehensions</a>
+        <a href="#revision"><span class="nav-num">★</span>Quick Revision</a>
+      </nav>
+      <div class="sidebar-note">💡 Tip: Choose a topic to jump to it. Use the search box to filter the navigation.</div>
+    </aside>
+    <main>
+      <div class="topbar"><span>PYTHON • FOUNDATION NOTES • INTERACTIVE GUIDE</span><button
+          onclick="window.print()">Print / Save PDF ↗</button></div>
+      <header class="hero" id="overview">
+        <span class="eyebrow">🚀 Learn • Practice • Build</span>
+        <h2>Master <span class="gradient-text">Python</span><br>One Topic at a Time.</h2>
+        <p>A colorful, structured learning guide based on your Python topic notes. Explore syntax, core concepts,
+          built-in data structures, and practical examples from the left navigation.</p>
+        <div class="hero-tags"><span class="pill">🐍 Python Fundamentals</span><span class="pill">🧠 Core
+            Concepts</span><span class="pill">💻 Code Examples</span><span class="pill">📘 Revision Ready</span></div>
+      </header>
+      <div class="stats">
+        <div class="stat"><strong>15</strong><span>Core learning sections</span></div>
+        <div class="stat"><strong>5</strong><span>Major collection / sequence topics</span></div>
+        <div class="stat"><strong>100%</strong><span>Responsive navigation layout</span></div>
+      </div>
+
+      <section class="section" id="print">
+        <div class="section-heading">
+          <div class="section-icon">🖨️</div>
+          <div>
+            <h2>01. Print Function</h2>
+            <p>Display text, variables, and formatted output.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Common ways to use <code>print()</code></h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Syntax</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>print("Suresh VJ")</code></td>
+                  <td>Print a string.</td>
+                </tr>
+                <tr>
+                  <td><code>print(x)</code></td>
+                  <td>Print a variable value.</td>
+                </tr>
+                <tr>
+                  <td><code>print(x, y)</code></td>
+                  <td>Print multiple values with a separator (space by default).</td>
+                </tr>
+                <tr>
+                  <td><code>print("Python", end="@")</code></td>
+                  <td>Use <code>end</code> to change the ending character and keep the next print on the same line.</td>
+                </tr>
+                <tr>
+                  <td><code>print("09","12","2016", sep="-")</code></td>
+                  <td>Use <code>sep</code> to separate printed values.</td>
+                </tr>
+                <tr>
+                  <td><code>print(f"Hello {x}")</code></td>
+                  <td>Format a value using an f-string.</td>
+                </tr>
+                <tr>
+                  <td><code>"Hello {}".format(x)</code></td>
+                  <td>Format a string using <code>str.format()</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pre><code class="language-python">name = "Suresh VJ"
+year = 2026
+
+print("Hello", name)
+print("Python", end="@")
+print("Learning")
+print("13", "10", year, sep="-")
+print(f"Welcome, {name}!")</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="variables">
+        <div class="section-heading">
+          <div class="section-icon">📦</div>
+          <div>
+            <h2>02. Variables & Constants</h2>
+            <p>Store values and give them meaningful names.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Variable declaration</h3>
+            <pre><code class="language-python">x = 10
+name = "Suresh VJ"
+
+# Multiple assignment
+x, y = 26, "Suresh VJ"
+
+# Same value assigned to both names
+a = b = "Python"</code></pre>
+          </div>
+          <div class="card">
+            <h3>Naming rules</h3>
+            <ul class="clean">
+              <li>Names cannot start with a digit.</li>
+              <li>Do not use spaces in variable names.</li>
+              <li>Names can start with a letter or underscore.</li>
+              <li>Use meaningful names such as <code>total_price</code>.</li>
+              <li>Python names are case-sensitive.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Constants by convention</h3>
+          <p>Python does not enforce constants, but uppercase names communicate that a value should not be reassigned.
+            Constants are often kept in a separate module and imported where needed.</p>
+          <pre><code class="language-python"># constants.py
+PI = 3.14
+GRAVITY = 9.8
+
+# main.py
+import constants
+print(constants.PI)
+print(constants.GRAVITY)</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="datatypes">
+        <div class="section-heading">
+          <div class="section-icon">🧩</div>
+          <div>
+            <h2>03. Data Types</h2>
+            <p>Understand the built-in types used to represent values.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="topic"><strong>Numeric</strong>
+            <p><code>int</code>, <code>float</code>, <code>complex</code><br>Examples: <code>26</code>,
+              <code>10.5</code>, <code>2+3j</code></p>
+          </div>
+          <div class="topic"><strong>String</strong>
+            <p><code>str</code><br>Example: <code>"Python"</code></p>
+          </div>
+          <div class="topic"><strong>Sequence</strong>
+            <p><code>list</code>, <code>tuple</code>, <code>range</code></p>
+          </div>
+          <div class="topic"><strong>Mapping</strong>
+            <p><code>dict</code><br>Example: <code>{"name": "Sam"}</code></p>
+          </div>
+          <div class="topic"><strong>Set</strong>
+            <p><code>set</code><br>Example: <code>{1, 2, 3}</code></p>
+          </div>
+          <div class="topic"><strong>Boolean & None</strong>
+            <p><code>bool</code> is <code>True</code>/<code>False</code>; <code>None</code> represents no value.</p>
+          </div>
+        </div>
+        <div class="callout">Remember: Python values are objects. Use <code>type(value)</code> to inspect a value's type
+          and <code>isinstance(value, SomeType)</code> to test a type relationship.</div>
+        <div class="card">
+          <h3>Number literal examples</h3>
+          <pre><code class="language-python">decimal_num = 100
+binary_num = 0b110101
+octal_num = 0o215
+hex_num = 0x12D
+
+print(type(decimal_num))
+print(binary_num, octal_num, hex_num)</code></pre>
+          <p>Python uses prefixes <code>0b</code> for binary, <code>0o</code> for octal, and <code>0x</code> for
+            hexadecimal literals.</p>
+        </div>
+      </section>
+
+      <section class="section" id="operators">
+        <div class="section-heading">
+          <div class="section-icon">➗</div>
+          <div>
+            <h2>04. Operators</h2>
+            <p>Perform calculations, comparisons, assignments, and membership tests.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Arithmetic</h3>
+            <p><code>+ - * / // % **</code></p>
+            <pre><code class="language-python">a, b = 10, 3
+print(a + b)   # 13
+print(a / b)   # division
+print(a // b)  # floor division
+print(a % b)   # remainder
+print(a ** b)  # power</code></pre>
+          </div>
+          <div class="card">
+            <h3>Comparison</h3>
+            <p><code>== != &lt; &gt; &lt;= &gt;=</code></p>
+            <pre><code class="language-python">age = 21
+print(age >= 18)  # True
+print(age == 21)  # True
+print(age != 10)  # True</code></pre>
+          </div>
+          <div class="card">
+            <h3>Assignment</h3>
+            <p><code>= += -= *= /= //= %= **=</code></p>
+            <pre><code class="language-python">count = 5
+count += 2
+count *= 3
+print(count)  # 21</code></pre>
+          </div>
+          <div class="card">
+            <h3>Logical, identity & membership</h3>
+            <p><code>and</code>, <code>or</code>, <code>not</code>; <code>is</code>, <code>is not</code>;
+              <code>in</code>, <code>not in</code></p>
+            <pre><code class="language-python">print(5 > 2 and 8 > 3)
+print("py" in "python")
+x = None
+print(x is None)</code></pre>
+          </div>
+        </div>
+        <div class="callout">Use <code>==</code> to compare values and <code>is</code> to check object identity.
+          Python's equality operator is <code>==</code>; <code>===</code> is not a Python operator.</div>
+      </section>
+
+      <section class="section" id="casting">
+        <div class="section-heading">
+          <div class="section-icon">🔄</div>
+          <div>
+            <h2>05. Type Casting</h2>
+            <p>Convert values using built-in constructors when conversion is supported.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Common conversion constructors</h3>
+          <div class="grid-3">
+            <div class="topic"><strong>Numeric</strong>
+              <p><code>int()</code>, <code>float()</code>, <code>complex()</code></p>
+            </div>
+            <div class="topic"><strong>Text & Boolean</strong>
+              <p><code>str()</code>, <code>bool()</code></p>
+            </div>
+            <div class="topic"><strong>Collections</strong>
+              <p><code>list()</code>, <code>tuple()</code>, <code>set()</code>, <code>dict()</code></p>
+            </div>
+          </div>
+          <pre><code class="language-python">value = "42"
+number = int(value)
+decimal_value = float("10.5")
+letters = list("cat")
+unique_values = set([1, 1, 2, 3])
+
+print(number)         # 42
+print(decimal_value)  # 10.5
+print(letters)        # ['c', 'a', 't']
+print(unique_values)  # {1, 2, 3}</code></pre>
+          <p>Conversion depends on the source value and target type. Some conversions raise <code>ValueError</code> or
+            <code>TypeError</code>; for example, <code>int("hello")</code> fails.</p>
+        </div>
+      </section>
+
+      <section class="section" id="mutable">
+        <div class="section-heading">
+          <div class="section-icon">🪄</div>
+          <div>
+            <h2>06. Mutable & Immutable</h2>
+            <p>Whether an object can be changed after it is created.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>🟢 Mutable objects</h3>
+            <p>The object can be modified in place.</p>
+            <ul class="clean">
+              <li><code>list</code></li>
+              <li><code>dict</code></li>
+              <li><code>set</code></li>
+            </ul>
+            <pre><code class="language-python">items = [1, 2]
+items.append(3)
+print(items)  # [1, 2, 3]</code></pre>
+          </div>
+          <div class="card">
+            <h3>🔵 Immutable objects</h3>
+            <p>The object itself cannot be modified in place.</p>
+            <ul class="clean">
+              <li><code>int</code>, <code>float</code>, <code>bool</code></li>
+              <li><code>str</code>, <code>tuple</code></li>
+              <li><code>NoneType</code></li>
+            </ul>
+            <pre><code class="language-python">text = "Py"
+text = text + "thon"
+print(text)  # a new string value</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="interning">
+        <div class="section-heading">
+          <div class="section-icon">🧠</div>
+          <div>
+            <h2>07. Object Interning</h2>
+            <p>Python may reuse certain immutable objects to optimize memory and speed.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Key idea</h3>
+          <p>Object interning/caching means Python may let multiple references point to the same object for selected
+            values. The exact behavior can depend on the Python implementation and runtime context, so do not rely on it
+            for correctness.</p>
+          <pre><code class="language-python">a = 10
+b = a
+print(a == b)  # True: equal values
+print(a is b)  # True here: same referenced object
+
+# For value comparison, normally use ==</code></pre>
+          <div class="callout">Best practice: use <code>==</code> to compare values. Use <code>is</code> for identity
+            checks, commonly <code>value is None</code>.</div>
+        </div>
+      </section>
+
+      <section class="section" id="strings">
+        <div class="section-heading">
+          <div class="section-icon">🔤</div>
+          <div>
+            <h2>08. Strings & String Methods</h2>
+            <p>Strings are ordered, sliceable, and immutable sequences of characters.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Declaration, indexing & slicing</h3>
+          <pre><code class="language-python">s1 = 'Python'
+s2 = "Learning"
+s3 = """Multi-line
+string"""
+
+word = "Python"
+print(word[0])    # P
+print(word[-1])   # n
+print(word[1:4])  # yth</code></pre>
+          <p>Forward indexing starts at <code>0</code>; negative indexing starts at <code>-1</code> from the end. Slice
+            end positions are excluded.</p>
+        </div>
+        <div class="card">
+          <h3>Frequently used string methods</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>capitalize()</code></td>
+                  <td>Uppercases the first character and lowercases the rest.</td>
+                </tr>
+                <tr>
+                  <td><code>title()</code></td>
+                  <td>Title-cases words.</td>
+                </tr>
+                <tr>
+                  <td><code>casefold()</code>, <code>lower()</code>, <code>upper()</code></td>
+                  <td>Change letter casing.</td>
+                </tr>
+                <tr>
+                  <td><code>swapcase()</code></td>
+                  <td>Switches uppercase and lowercase characters.</td>
+                </tr>
+                <tr>
+                  <td><code>istitle()</code>, <code>islower()</code>, <code>isupper()</code></td>
+                  <td>Check casing patterns.</td>
+                </tr>
+                <tr>
+                  <td><code>center(width, fillchar)</code></td>
+                  <td>Returns a centered string.</td>
+                </tr>
+                <tr>
+                  <td><code>strip()</code>, <code>lstrip()</code>, <code>rstrip()</code></td>
+                  <td>Remove leading/trailing whitespace or specified characters.</td>
+                </tr>
+                <tr>
+                  <td><code>count(sub)</code></td>
+                  <td>Counts occurrences of a substring.</td>
+                </tr>
+                <tr>
+                  <td><code>find(sub)</code>, <code>rfind(sub)</code></td>
+                  <td>Find first/rightmost occurrence; return <code>-1</code> if absent.</td>
+                </tr>
+                <tr>
+                  <td><code>startswith(prefix)</code>, <code>endswith(suffix)</code></td>
+                  <td>Check the beginning or ending of a string.</td>
+                </tr>
+                <tr>
+                  <td><code>index(sub)</code>, <code>rindex(sub)</code></td>
+                  <td>Find a substring; raise <code>ValueError</code> if absent.</td>
+                </tr>
+                <tr>
+                  <td><code>isnumeric()</code>, <code>isdecimal()</code>, <code>isdigit()</code></td>
+                  <td>Check different categories of numeric characters.</td>
+                </tr>
+                <tr>
+                  <td><code>isalnum()</code>, <code>isalpha()</code>, <code>isspace()</code></td>
+                  <td>Check alphanumeric, alphabetic, or whitespace content.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pre><code class="language-python">text = "  Python Learning  "
+print(text.strip())
+print(text.strip().upper())
+print(text.lower().count("n"))
+print("Python".startswith("Py"))
+print("123".isdigit())</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="lists">
+        <div class="section-heading">
+          <div class="section-icon">📚</div>
+          <div>
+            <h2>09. Lists</h2>
+            <p>Ordered, mutable collections that allow duplicates and mixed data types.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Declaration & properties</h3>
+          <pre><code class="language-python">items = []
+numbers = [4, 8, 8, 12]
+mixed = [1, "Python", True]
+also_list = list((1, 2, 3))
+
+print(numbers[0])   # 4
+print(numbers[-1])  # 12</code></pre>
+          <div class="grid-3">
+            <div class="topic"><strong>Mutable</strong>
+              <p>Can change in place.</p>
+            </div>
+            <div class="topic"><strong>Ordered</strong>
+              <p>Retains item order.</p>
+            </div>
+            <div class="topic"><strong>Duplicates allowed</strong>
+              <p>Repeated values are valid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>List methods</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>append(value)</code></td>
+                  <td>Add one item at the end.</td>
+                </tr>
+                <tr>
+                  <td><code>extend(iterable)</code></td>
+                  <td>Add each item from an iterable.</td>
+                </tr>
+                <tr>
+                  <td><code>insert(index, value)</code></td>
+                  <td>Insert at an index.</td>
+                </tr>
+                <tr>
+                  <td><code>copy()</code></td>
+                  <td>Create a shallow copy.</td>
+                </tr>
+                <tr>
+                  <td><code>count(value)</code>, <code>index(value)</code></td>
+                  <td>Count occurrences or find an item's index.</td>
+                </tr>
+                <tr>
+                  <td><code>reverse()</code></td>
+                  <td>Reverse the list in place.</td>
+                </tr>
+                <tr>
+                  <td><code>sort(reverse=False)</code></td>
+                  <td>Sort in place, ascending by default.</td>
+                </tr>
+                <tr>
+                  <td><code>pop(index)</code></td>
+                  <td>Remove and return an item; defaults to the last.</td>
+                </tr>
+                <tr>
+                  <td><code>remove(value)</code></td>
+                  <td>Remove the first matching value.</td>
+                </tr>
+                <tr>
+                  <td><code>clear()</code></td>
+                  <td>Remove all items.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pre><code class="language-python">nums = [5, 2, 9]
+nums.append(7)
+nums.extend([1, 3])
+nums.sort()
+print(nums)
+
+last_item = nums.pop()
+print(last_item, nums)</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="tuples">
+        <div class="section-heading">
+          <div class="section-icon">🔗</div>
+          <div>
+            <h2>10. Tuples</h2>
+            <p>Ordered, immutable collections that allow duplicate values.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Declaration & methods</h3>
+          <pre><code class="language-python">empty = ()
+single_item = (4,)  # comma makes it a tuple
+values = (1, 2, 2, 3)
+also_tuple = 1, 2, 3
+
+print(values[0])
+print(values.count(2))
+print(values.index(3))</code></pre>
+          <ul class="clean">
+            <li>Tuples are ordered and support indexing and slicing.</li>
+            <li>Tuples can contain values of different types.</li>
+            <li>Use a trailing comma for a single-item tuple: <code>(4,)</code>.</li>
+            <li>Available common methods include <code>count()</code> and <code>index()</code>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="sets">
+        <div class="section-heading">
+          <div class="section-icon">🟩</div>
+          <div>
+            <h2>11. Sets</h2>
+            <p>Mutable collections of unique, hashable elements with no positional indexing.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Declaration & methods</h3>
+          <pre><code class="language-python">empty_set = set()  # {} creates an empty dictionary
+values = {1, 2, 2, 3}
+values.add(4)
+values.discard(2)
+print(values)</code></pre>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>add(value)</code></td>
+                  <td>Add an element.</td>
+                </tr>
+                <tr>
+                  <td><code>clear()</code></td>
+                  <td>Remove all elements.</td>
+                </tr>
+                <tr>
+                  <td><code>copy()</code></td>
+                  <td>Return a shallow copy.</td>
+                </tr>
+                <tr>
+                  <td><code>difference(other)</code></td>
+                  <td>Elements in the first set but not the other.</td>
+                </tr>
+                <tr>
+                  <td><code>difference_update(other)</code></td>
+                  <td>Update the set to keep only its difference.</td>
+                </tr>
+                <tr>
+                  <td><code>discard(value)</code></td>
+                  <td>Remove an element if present without raising an error if absent.</td>
+                </tr>
+                <tr>
+                  <td><code>intersection(other)</code></td>
+                  <td>Elements common to both sets.</td>
+                </tr>
+                <tr>
+                  <td><code>intersection_update(other)</code></td>
+                  <td>Keep only common elements in the set.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pre><code class="language-python">a = {1, 2, 3, 4}
+b = {3, 4, 5}
+
+print(a.difference(b))      # {1, 2}
+print(a.intersection(b))    # {3, 4}</code></pre>
+          <div class="callout">Set elements must be hashable. Lists, dictionaries, and sets cannot be elements of
+            another set.</div>
+        </div>
+      </section>
+
+      <section class="section" id="slicing">
+        <div class="section-heading">
+          <div class="section-icon">✂️</div>
+          <div>
+            <h2>12. Slicing</h2>
+            <p>Access a subpart of a sequence with start, end, and step.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Syntax: <code>sequence[start : end : step]</code></h3>
+          <pre><code class="language-python">x = [10, 20, 30, 40, 50, 60]
+
+print(x[2:5])    # [30, 40, 50]
+print(x[2:5:2])  # [30, 50]
+print(x[-2:])   # [50, 60]
+print(x[:3])    # [10, 20, 30]
+print(x[::-1])  # reversed copy</code></pre>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Slice</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>x[2:5]</code></td>
+                  <td>Start at index 2, stop before index 5.</td>
+                </tr>
+                <tr>
+                  <td><code>x[:5]</code></td>
+                  <td>Start at the beginning, stop before index 5.</td>
+                </tr>
+                <tr>
+                  <td><code>x[2:]</code></td>
+                  <td>Start at index 2 and continue to the end.</td>
+                </tr>
+                <tr>
+                  <td><code>x[-2:]</code></td>
+                  <td>Take the final two elements.</td>
+                </tr>
+                <tr>
+                  <td><code>x[::-1]</code></td>
+                  <td>Traverse the sequence in reverse.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout">The end index is excluded. Slicing works on sequences such as strings, lists, and tuples;
+            sets and dictionaries do not support slicing.</div>
+        </div>
+      </section>
+
+      <section class="section" id="concat">
+        <div class="section-heading">
+          <div class="section-icon">🧵</div>
+          <div>
+            <h2>13. Concatenation</h2>
+            <p>Join compatible sequences using <code>+</code> or augmented assignment.</p>
+          </div>
+        </div>
+        <div class="card">
+          <pre><code class="language-python">first = "Suresh"
+last = " VJ"
+print(first + last)  # Suresh VJ
+
+a = [1, 2]
+b = [3, 4]
+print(a + b)         # [1, 2, 3, 4]
+
+x = (10, 20)
+y = (30,)
+print(x + y)         # (10, 20, 30)
+
+first += "!"
+print(first)</code></pre>
+          <p>String concatenation joins strings, list concatenation joins lists, and tuple concatenation joins tuples.
+            The operands need to be compatible types.</p>
+        </div>
+      </section>
+
+      <section class="section" id="sort">
+        <div class="section-heading">
+          <div class="section-icon">↕️</div>
+          <div>
+            <h2>14. Sort & Reverse</h2>
+            <p>Arrange values or produce a reversed sequence.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Sorting</h3>
+            <pre><code class="language-python">numbers = [4, 1, 7, 2]
+print(sorted(numbers))                 # ascending
+print(sorted(numbers, reverse=True))   # descending
+
+numbers.sort()  # sorts list in place</code></pre>
+            <p><code>sorted()</code> returns a new sorted list. <code>list.sort()</code> changes the list in place.</p>
+          </div>
+          <div class="card">
+            <h3>Reversing</h3>
+            <pre><code class="language-python">items = [1, 2, 3]
+print(items[::-1])        # reversed copy
+print(list(reversed(items)))
+
+items.reverse()           # in-place</code></pre>
+            <p>Use slicing or <code>reversed()</code> for a reversed iteration/copy. Sets and dictionaries do not
+              support sequence slicing.</p>
+          </div>
+        </div>
+        <div class="callout">For strings, <code>sorted("python")</code> returns a list of characters. Use
+          <code>"".join(sorted("python"))</code> to combine them into a string.</div>
+      </section>
+
+      <section class="section" id="comprehension">
+        <div class="section-heading">
+          <div class="section-icon">⚡</div>
+          <div>
+            <h2>15. Comprehensions</h2>
+            <p>Create lists, sets, dictionaries, and generator expressions concisely.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>List comprehension patterns</h3>
+          <pre><code class="language-python">x = range(0, 11)
+
+# Without a condition
+result = [i + 2 for i in x]
+
+# With an if condition
+filtered = [i + 2 for i in x if i <= 5]
+
+# With if/else expression
+mapped = [i + 2 if i > 3 else i for i in x]
+
+print(result)
+print(filtered)
+print(mapped)</code></pre>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Set comprehension</h3>
+            <pre><code class="language-python">unique_squares = {n * n for n in range(6)}
+print(unique_squares)</code></pre>
+          </div>
+          <div class="card">
+            <h3>Dictionary comprehension</h3>
+            <pre><code class="language-python">x = range(5)
+lookup = {f"key{i}": i + 2 for i in x}
+print(lookup)</code></pre>
+          </div>
+          <div class="card">
+            <h3>Tuple creation</h3>
+            <p>A generator expression uses parentheses and produces values lazily. To build a tuple, wrap it with
+              <code>tuple()</code>.</p>
+            <pre><code class="language-python">values = tuple(n * 2 for n in range(5))
+print(values)</code></pre>
+          </div>
+          <div class="card">
+            <h3>When to use</h3>
+            <ul class="clean">
+              <li>Transform each item.</li>
+              <li>Filter items using a condition.</li>
+              <li>Build a dictionary from key-value pairs.</li>
+              <li>Keep comprehensions readable; use loops for complex logic.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="section" id="file-handling">
+          <div class="section-heading">
+              <div class="section-icon">⚡</div>
+              <div>
+                  <h2>16. File Handling</h2>
+                  <img
+                      src="E:\notes_dashboard\python\python_images\File_handling.png"
+                      alt="File Handling"
+                  >
+              </div>
+          </div>
+      </section>
+
+
+      <section class="section" id="revision">
+        <div class="section-heading">
+          <div class="section-icon">🎯</div>
+          <div>
+            <h2>Quick Revision Checklist</h2>
+            <p>Use this checklist to track your progress through the notes.</p>
+          </div>
+        </div>
+        <div class="card">
+          <p>Mark each concept as you revise it. Your checkmarks remain active while this page is open.</p>
+          <div class="grid-2" id="checklist">
+            <label class="topic"><input type="checkbox"> <strong>Print, sep, end & formatting</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Variables, naming & constants</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Built-in data types</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Arithmetic, comparison & logical
+                operators</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Type casting and conversion errors</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Mutable vs immutable objects</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Identity vs equality / object
+                interning</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>String indexing and methods</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>List and tuple methods</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Set operations</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Slicing, concatenation & reverse</strong></label>
+            <label class="topic"><input type="checkbox"> <strong>Sort and comprehensions</strong></label>
+          </div>
+        </div>
+      </section>
+      <footer>Designed for focused learning • Light blue + green theme • VJ AI Forge</footer>
+    </main>
+  </div>
+
+  <script>
+    const search = document.getElementById('topicSearch');
+    const links = [...document.querySelectorAll('#courseNav a')];
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      links.forEach(link => {
+        link.classList.toggle('hidden', !link.textContent.toLowerCase().includes(q));
+      });
+    });
+    const sections = [...document.querySelectorAll('main section, #overview')];
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { rootMargin: '-18% 0px -70% 0px' });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+
+</html>
